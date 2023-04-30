@@ -1,11 +1,10 @@
-import React from 'react';
-
-import { Box, Flex, HStack } from 'components/chakra-parts/Layout';
+import { Box, HStack } from 'components/chakra-parts/Layout';
+import { chakra } from 'components/chakra-parts/Other';
 import { Text } from 'components/chakra-parts/Typography';
 
-export const Footer = () => {
+export const MainFooter = () => {
   return (
-    <Flex
+    <chakra.footer
       alignItems="center"
       backgroundColor="blue.100"
       height="64px"
@@ -21,6 +20,6 @@ export const Footer = () => {
       <Box>
         <Text>ddd</Text>
       </Box>
-    </Flex>
+    </chakra.footer>
   );
 };

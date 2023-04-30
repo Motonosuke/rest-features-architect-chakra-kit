@@ -3,18 +3,6 @@ import { extendTheme } from '@chakra-ui/react';
 
 export const theme = extendTheme({
   colors: {
-    brand: {
-      50: 'linear-gradient(225deg, #00928E 0%, #2363A9 95.01%)',
-      100: 'linear-gradient(225deg, #00928E 0%, #2363A9 95.01%)',
-      200: 'linear-gradient(225deg, #00928E 0%, #2363A9 95.01%)',
-      300: 'linear-gradient(225deg, #0F6A68 0%, #234C79 95.01%)',
-      400: 'linear-gradient(225deg, #00928E 0%, #2363A9 95.01%)',
-      500: 'linear-gradient(225deg, #00928E 0%, #2363A9 95.01%)',
-      600: 'linear-gradient(225deg, #0F6A68 0%, #234C79 95.01%)',
-      700: 'linear-gradient(225deg, #0F6A68 0%, #234C79 95.01%)',
-      800: 'linear-gradient(225deg, #0F6A68 0%, #234C79 95.01%)',
-      900: 'linear-gradient(225deg, #0F6A68 0%, #234C79 95.01%)',
-    },
     deal: {
       50: '#E9E7F6',
       100: '#C9C4E9',
@@ -39,8 +27,6 @@ export const theme = extendTheme({
       800: '#37414F',
       900: '#031B30',
     },
-    personalityGradientDesktop: 'radial-gradient(40% 372% at 32% 48%, #FFFFFF 0%, #FFFFFF 36%, #F6F7F9 100%)',
-    personalityGradientMobile: 'linear-gradient(180deg, #FFFFFF 10%, #F6F7F9 60%)',
     primary: {
       50: '#E0EEFA',
       100: '#B6D8F5',

@@ -1,19 +1,18 @@
 import React from 'react';
 
 import { LoadingSpinner } from 'components/Loading';
-import { UnorderedList, ListItem } from 'components/chakra-parts/DataDisplay';
-import { usePosts } from 'features/posts/hooks';
+import { useFetchPosts } from 'features/posts/hooks';
 
 export const Posts: React.FunctionComponent = () => {
-  const { postsData } = usePosts();
+  const { postsData } = useFetchPosts();
 
   if (!postsData) return <LoadingSpinner />;
 
   return (
-    <UnorderedList>
-      {postsData?.map((post) => (
-        <ListItem key={post.id}>{post.body}</ListItem>
+    <ul>
+      {postsData.map((post) => (
+        <li key={post.id}>{post.body}</li>
       ))}
-    </UnorderedList>
+    </ul>
   );
 };

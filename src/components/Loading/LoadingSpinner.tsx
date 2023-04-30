@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Spinner } from 'components/chakra-parts/Feedback';
 import { Box } from 'components/chakra-parts/Layout';
 

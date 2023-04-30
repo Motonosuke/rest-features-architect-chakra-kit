@@ -1,1 +1,1 @@
-export * from './get-post';
+export { useGetPosts } from './get-post';
