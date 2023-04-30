@@ -1,3 +1,5 @@
+## ディレクトリ構成
+
 ```
 src
 ├── components        # アプリケーション全体で使用できる共通コンポーネント
@@ -70,6 +72,6 @@ page-components
     </div>
     <div style={{ margin-top: '10px' }}>
       <Albums />
-     </div>
-  </div>
+    </div>
+ </div>
 ```
