@@ -1,3 +1,14 @@
+## メインライブラリ
+- TypeScript
+- Next.js
+- Recoil
+- SWR
+- Zod
+- Chakra UI
+- ESlint
+- Prettier
+- husky
+
 ## ディレクトリ構成
 
 ```
@@ -8,7 +19,7 @@ src
 ├── hooks             # アプリケーション全体で使用できる共通hooks
 ├── libs              # ライブラリをアプリケーション用に設定して再度エクスポートしたもの
 ├── providers         # アプリケーションのすべてのプロバイダー
-├── stores            # グローバルステートストア
+├── stores            # グローバルステートを一元管理するところ
 ├── page-components   # featuresのコンポーネントを集約するところ
 ├── pages             # Nextjsのルーティングシステム
 ├── styles            # アプリケーション全体で使用されるCSS（上書きなどを想定）
@@ -17,21 +28,50 @@ src
 ```
 
 ## components
-comonentsでは、HeaderやFooterなど共通パーツや、Elementsファイル内にボタンやスピナーなど粒度の小さいUI要素を置く場所。
+comonentsでは、HeaderやFooterなど共通パーツや、スピナーなど粒度の小さいUI要素を置く場所。
 
 ```
 components
-├─ Elements/
-│  ├─ Button/
-│  │  ├─ Button.tsx/
-│  │  ├─ Button.stories.tsx/
-│  │  ├─ index.ts/
 ├─ Header/
 ├─ Footer/
+├─ Layouts/
+```
+
+### Layouts
+LayoutsではMainLayoutやErrorLayoutなどを置く。<br />
+_app.tsxでproviderを沢山ネストさせないために、_app.tsxでは必要最低限の処理を書き、他はLayout毎にに定義してFirst Load JS shared by allを少なくさせる。<br />
+＊ Layoutが切り替わってしまう場合は、各Layoutに定義されている状態を保持できないので注意する。
+```
+─ Layouts/
+  ├─ MainLayout.tsx/
+  ├─ ErrorLayout.tsx/
+  ├─ index.ts/
+```
+
+``` ts
+// MainLayout
+  <RecoilRoot>
+     <GlobalStateMainLayoutProvider>
+       <MainHeader />
+       <chakra.main>
+         <div>{page}</div>
+       </chakra.main>
+     </GlobalStateMainLayoutProvider>
+   </RecoilRoot>
+```
+``` ts
+// ErrorLayout
+    <>
+      <MainHeader />
+      <chakra.main>
+        <div>{page}</div>
+      </chakra.main>
+    </>
 ```
 
 ## features
-components、hooksなどこのディレクトリ階層は必要に応じて増えたり（redcuerやactionなど）、減ったり（testsやstoriesなど）する予定。
+components、hooksなどこのディレクトリ階層は必要に応じて増えたり、減ったり（states、tests、storiesなど）する。<br />
+＊ statesはreducerやcookie、localstorageなどを定義する。
 
 ```
 features
@@ -48,6 +88,7 @@ features
 │  ├─ types/
 │  │  ├─ posts-type.ts/
 │  │  ├─ index.ts/
+│  ├─ states/
 │  ├─ tests/
 │  ├─ stories/
 ```
@@ -61,17 +102,32 @@ Nextjsのpagesルーティング内でなるべく依存関係を作らないよ
 page-components
 ├─ posts/
 │  ├─ Page.tsx/
-│  ├─ index.ts/ 
+│  ├─ index.ts/
 ```
 
 ```
 // Page
- <div>
-    <div>
+ <Box>
+    <Box>
       <Posts />
-    </div>
-    <div style={{ margin-top: '10px' }}>
+    </Box>
+    <Box mt={10}>
       <Albums />
-    </div>
- </div>
+    </Box>
+ </Box>
 ```
+
+## 命名規則
+コード命名規則はESlintの設定に準ずる。
+
+### src/のディレクトリ・ファイル命名規則
+| 対象ファイル | 命名規則  |
+|:-----------|:------------|
+| components |パスカルケース（PascalCase） |
+| page-components |パスカルケース（PascalCase） |
+| hooks       | キャメルケース（camelCase）|
+| 上記以外 |ケバブケース（kebab-case）|
+
+* src/pagesのpath（url）について <br />
+以下参考に２単語以上の英単語の場合はケバブケース（kebab-cse）を推奨。<br />
+[Google検索セントラル](https://developers.google.com/search/docs/crawling-indexing/url-structure?hl=ja)
